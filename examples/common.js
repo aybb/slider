@@ -21706,6 +21706,9 @@
 	      });
 	      nextHandle = nextBounds.indexOf(value);
 	    }
+	    if (nextBounds[1] < props.minValue || nextBounds[1] > props.maxValue) {
+	      return;
+	    }
 	    this.onChange({
 	      handle: nextHandle,
 	      bounds: nextBounds
@@ -21791,6 +21794,11 @@
 	
 	    var nextBounds = [].concat((0, _toConsumableArray3.default)(state.bounds));
 	    nextBounds[valueNeedChanging] = value;
+	    if (nextBounds[1] < props.minValue) {
+	      nextBounds[1] = props.minValue;
+	    } else if (nextBounds[1] > props.maxValue) {
+	      nextBounds[1] = props.maxValue;
+	    }
 	    this.onChange({ bounds: nextBounds });
 	  };
 	
@@ -22129,6 +22137,8 @@
 	Slider.propTypes = {
 	  min: _react2.default.PropTypes.number,
 	  max: _react2.default.PropTypes.number,
+	  minValue: _react2.default.PropTypes.number,
+	  maxValue: _react2.default.PropTypes.number,
 	  step: _react2.default.PropTypes.number,
 	  defaultValue: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.number)]),
 	  value: _react2.default.PropTypes.oneOfType([_react2.default.PropTypes.number, _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.number)]),
